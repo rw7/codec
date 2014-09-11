@@ -1,0 +1,40 @@
+<project name="codec" default="all" xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<property name="build.dir" location="build" />
+	<property name="artifacts.dir" location="bin" />
+	
+	<fileset id="runtime.libs" dir="lib" includes="*.jar" excludes="*-source.jar" />
+	
+	<target name="all" depends="clean,dist" />
+
+	<target name="clean">
+		<delete file="${artifacts.dir}" quiet="true" />
+		<delete file="${build.dir}" quiet="true"/>
+	</target>
+		
+	<target name="compile">
+		<mkdir dir="${build.dir}" />
+		<javac destdir="${build.dir}" encoding="US-ASCII" includeantruntime="false" srcdir="src" target="1.7">
+			<classpath>
+				<fileset refid="runtime.libs" />
+				<fileset dir="${java.home}/lib" includes="jfxrt.jar"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="dist" depends="compile">
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+		                uri="javafx:com.sun.javafx.tools.ant"
+		                classpath=".:path/to/sdk/lib/ant-javafx.jar"/> 
+		
+		<jar basedir="${build.dir}" destfile="${artifacts.dir}/codec.jar">
+			<fileset dir="${build.dir}" includes="*.class" />
+			<fileset refid="runtime.libs" />
+			<manifest>
+				<attribute name="JavaFX-Application-Class" value="com.thrivingcode.codec.CodecApplication"/>
+				<attribute name="JavaFX-Version" value="2.0+"/>
+				<attribute name="JavaFX-Classpath" value=""/>
+				<attribute name="Main-Class" value="com.thrivingcode.codec.CodecApplication"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
