@@ -1,5 +1,7 @@
 package com.thrivingcode.codec;
 
+import java.util.Arrays;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -15,7 +17,7 @@ abstract class Input {
 		inputs.getGrid().add(labelNode, 0, row);
 
 		textField = new TextField();
-		textField.setMinWidth(100);
+		textField.setMinWidth(300);
 		textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override public void handle(KeyEvent event) {
 				String text = textField.getText();
@@ -26,17 +28,31 @@ abstract class Input {
 		inputs.add(this);
 	}
 
-	void encodeAndSet(Integer newCodepoint) {
-		if (newCodepoint == null)
-			textField.setText("(invalid)");
+	void encodeAndSet(int[] newCodepoints) {
+		if (newCodepoints == null)
+			textField.setText("(invalid input)");
 		else
-			textField.setText(encode(newCodepoint.intValue()));
+			textField.setText(encode(newCodepoints));
 	}
 	
-	abstract protected Integer decode(String input);
-	abstract protected String encode(int newCodepoint);
+	abstract protected int[] decode(String input);
+	abstract protected String encode(int[] codepoints);
 
-	protected String codePointToString(int codepoint) {
-		return String.copyValueOf(Character.toChars(codepoint));
+	protected String codepointsToString(int[] codepoints) {
+		StringBuilder builder = new StringBuilder();
+		for (int codepoint : codepoints)
+			builder.append(Character.toChars(codepoint));
+		return builder.toString();
+	}
+
+	protected int[] stringToCodepoints(final String string) {
+		final int[] result = new int[string.length()*2];
+		int resultOffset = 0;
+		for (int sourceOffset = 0; sourceOffset < string.length(); ) {
+		   final int codepoint = string.codePointAt(sourceOffset);
+		   result[resultOffset++] = codepoint;
+		   sourceOffset += Character.charCount(codepoint);
+		}
+		return Arrays.copyOf(result, resultOffset);
 	}
 }

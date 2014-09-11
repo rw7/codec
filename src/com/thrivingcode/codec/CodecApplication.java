@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -23,14 +24,24 @@ public class CodecApplication extends Application {
 		
 		Inputs inputs = new Inputs(grid);
 		new PlaintextInput(inputs);
-		new CodepointNameInput(inputs);
 		new CodepointHexInput(inputs);
-		new Utf8Input(inputs);
-		new Latin1Input(inputs);
+		new CodepointNameInput(inputs);
+		inputs.add(new Separator());
 		new HtmlInput(inputs);
 		new XmlInput(inputs);
+		new EcmaScriptInput(inputs);
+		new UrlInput(inputs);
+		inputs.add(new Separator());
+		new CharsetHexInput(inputs, "US-ASCII");
+		new CharsetHexInput(inputs, "UTF-8");
+		new CharsetHexInput(inputs, "ISO-8859-1");
+		new CharsetHexInput(inputs, "ISO-8859-15");
+		new CharsetHexInput(inputs, "UTF-16BE");
+		new CharsetHexInput(inputs, "Windows-1251");
+		new CharsetHexInput(inputs, "GB2312");
+		new CharsetHexInput(inputs, "Cp1047", "EBCDIC");
 
-		inputs.update(0x1F602, null);
+		inputs.update(new int[]{0x1F602}, null);
 		
 		return grid;
 	}

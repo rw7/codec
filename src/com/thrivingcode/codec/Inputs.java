@@ -3,6 +3,7 @@ package com.thrivingcode.codec;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 class Inputs {
@@ -19,6 +20,11 @@ class Inputs {
 		inputs.add(input);
 	}
 
+	public void add(Node node) {
+		int r = row++;
+		grid.add(node, 0, r, 2, 1);
+	}
+	
 	public int nextRow() {
 		return row++;
 	}
@@ -27,12 +33,11 @@ class Inputs {
 		return grid;
 	}
 
-	public void update(Integer newCodepoint, Input except) {
+	public void update(int[] codepoints, Input except) {
 		for (Input input : inputs) {
 			if (input == except)
 				continue;
-			input.encodeAndSet(newCodepoint);
+			input.encodeAndSet(codepoints);
 		}
 	}
-
 }

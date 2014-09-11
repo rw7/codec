@@ -8,13 +8,13 @@ public class XmlInput extends Input {
 		super(inputs, "XML escaped");
 	}
 
-	@Override protected Integer decode(String input) {
+	@Override protected int[] decode(String input) {
 		String result = StringEscapeUtils.unescapeXml(input);
-		return result.codePointAt(0);
+		return stringToCodepoints(result);
 	}
 
-	@Override protected String encode(int codepoint) {
-		return StringEscapeUtils.escapeXml(codePointToString(codepoint));
+	@Override protected String encode(int[] codepoints) {
+		return StringEscapeUtils.escapeXml(codepointsToString(codepoints));
 	}
 
 }
