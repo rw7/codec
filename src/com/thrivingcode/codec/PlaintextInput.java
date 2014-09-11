@@ -7,11 +7,11 @@ class PlaintextInput extends Input {
 		super(inputs, "Plain");
 	}
 
-	@Override protected int[] decode(String input) {
-		return stringToCodepoints(input);
+	@Override protected String decode(String input) {
+		return input;
 	}
 
-	@Override protected String encode(int[] codepoints) {
-		return codepointsToString(codepoints);
+	@Override protected String encode(String plaintext) {
+		return plaintext;
 	}
 }

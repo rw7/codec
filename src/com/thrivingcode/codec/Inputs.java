@@ -33,11 +33,11 @@ class Inputs {
 		return grid;
 	}
 
-	public void update(int[] codepoints, Input except) {
+	public void update(String plaintext, Input except) {
 		for (Input input : inputs) {
 			if (input == except)
 				continue;
-			input.encodeAndSet(codepoints);
+			input.encodeAndSet(plaintext);
 		}
 	}
 }

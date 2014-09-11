@@ -30,7 +30,10 @@ public class CodecApplication extends Application {
 		new HtmlInput(inputs);
 		new XmlInput(inputs);
 		new EcmaScriptInput(inputs);
-		new UrlInput(inputs);
+		new UrlInput(inputs, "UTF-8");
+		new UrlInput(inputs, "ISO-8859-1");
+		inputs.add(new Separator());
+		new Base64Input(inputs);
 		inputs.add(new Separator());
 		new CharsetHexInput(inputs, "US-ASCII");
 		new CharsetHexInput(inputs, "UTF-8");
@@ -41,7 +44,7 @@ public class CodecApplication extends Application {
 		new CharsetHexInput(inputs, "GB2312");
 		new CharsetHexInput(inputs, "Cp1047", "EBCDIC");
 
-		inputs.update(new int[]{0x1F602}, null);
+		inputs.update(String.copyValueOf(Character.toChars(0x1F602)), null);
 		
 		return grid;
 	}

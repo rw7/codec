@@ -28,23 +28,16 @@ abstract class Input {
 		inputs.add(this);
 	}
 
-	void encodeAndSet(int[] newCodepoints) {
-		if (newCodepoints == null)
+	void encodeAndSet(String plaintext) {
+		if (plaintext == null)
 			textField.setText("(invalid input)");
 		else
-			textField.setText(encode(newCodepoints));
+			textField.setText(encode(plaintext));
 	}
 	
-	abstract protected int[] decode(String input);
-	abstract protected String encode(int[] codepoints);
-
-	protected String codepointsToString(int[] codepoints) {
-		StringBuilder builder = new StringBuilder();
-		for (int codepoint : codepoints)
-			builder.append(Character.toChars(codepoint));
-		return builder.toString();
-	}
-
+	abstract protected String decode(String input);
+	abstract protected String encode(String plaintext);
+	
 	protected int[] stringToCodepoints(final String string) {
 		final int[] result = new int[string.length()*2];
 		int resultOffset = 0;
