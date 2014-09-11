@@ -8,15 +8,15 @@ public class HtmlInput extends Input {
 		super(inputs, "HTML escaped");
 	}
 
-	@Override protected Character decode(String input) {
+	@Override protected Integer decode(String input) {
 		String result = StringEscapeUtils.unescapeHtml4(input);
 		if (result.length() != 1)
 			return null;
-		return result.charAt(0);
+		return result.codePointAt(0);
 	}
 
-	@Override protected String encode(char newPlaintext) {
-		return StringEscapeUtils.escapeHtml4(newPlaintext+"");
+	@Override protected String encode(int codepoint) {
+		return StringEscapeUtils.escapeHtml4(codePointToString(codepoint));
 	}
 
 }

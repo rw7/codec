@@ -26,13 +26,17 @@ abstract class Input {
 		inputs.add(this);
 	}
 
-	void encodeAndSet(Character newPlainText) {
-		if (newPlainText == null)
+	void encodeAndSet(Integer newCodepoint) {
+		if (newCodepoint == null)
 			textField.setText("(invalid)");
 		else
-			textField.setText(encode(newPlainText.charValue()));
+			textField.setText(encode(newCodepoint.intValue()));
 	}
 	
-	abstract protected Character decode(String input);
-	abstract protected String encode(char newPlaintext);
+	abstract protected Integer decode(String input);
+	abstract protected String encode(int newCodepoint);
+
+	protected String codePointToString(int codepoint) {
+		return String.copyValueOf(Character.toChars(codepoint));
+	}
 }

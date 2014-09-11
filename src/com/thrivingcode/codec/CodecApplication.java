@@ -23,12 +23,15 @@ public class CodecApplication extends Application {
 		
 		Inputs inputs = new Inputs(grid);
 		new PlaintextInput(inputs);
-		new UnicodeInput(inputs);
+		new CodepointNameInput(inputs);
+		new CodepointHexInput(inputs);
 		new Utf8Input(inputs);
 		new Latin1Input(inputs);
 		new HtmlInput(inputs);
 		new XmlInput(inputs);
 
+		inputs.update(0x1F602, null);
+		
 		return grid;
 	}
 

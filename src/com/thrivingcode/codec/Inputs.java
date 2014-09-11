@@ -27,11 +27,11 @@ class Inputs {
 		return grid;
 	}
 
-	public void update(Character newPlaintext, Input except) {
+	public void update(Integer newCodepoint, Input except) {
 		for (Input input : inputs) {
 			if (input == except)
 				continue;
-			input.encodeAndSet(newPlaintext);
+			input.encodeAndSet(newCodepoint);
 		}
 	}
 

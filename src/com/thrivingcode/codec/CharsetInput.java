@@ -23,22 +23,19 @@ public abstract class CharsetInput extends Input {
 		decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPORT);
 	}
 
-	@Override protected String encode(char character) {
+	@Override protected String encode(int codepoint) {
 		try {
-			String hex = "";
-			CharBuffer buffer = CharBuffer.allocate(1);
-			buffer.append(character);
-			buffer.rewind();
-			ByteBuffer bytes = encoder.encode(buffer);
+			ByteBuffer bytes = encoder.encode(CharBuffer.wrap(Character.toChars(codepoint)));
+			StringBuilder hex = new StringBuilder();
 			for (int pos=0; pos<bytes.limit(); pos++)
-				hex += StringUtils.leftPad(Integer.toHexString(0x000000FF & bytes.get(pos)), 2, "0");
-			return hex.toUpperCase();
+				hex.append(StringUtils.leftPad(Integer.toHexString(0x000000FF & bytes.get(pos)).toUpperCase(), 2, "0"));
+			return hex.toString();
 		} catch (CharacterCodingException e) {
 			return "(unsupported)";
 		}
 	}
 
-	@Override protected Character decode(String input) {
+	@Override protected Integer decode(String input) {
 		if (input.length() % 2 != 0 || input.length() == 0)
 			return null;
 		
@@ -51,7 +48,8 @@ public abstract class CharsetInput extends Input {
 			}
 		}
 		try {
-			return decoder.decode(ByteBuffer.wrap(bytes)).get();
+			char[] chars = decoder.decode(ByteBuffer.wrap(bytes)).array();
+			return Character.codePointAt(chars, 0);
 		} catch (Exception e) {
 			return null;
 		}

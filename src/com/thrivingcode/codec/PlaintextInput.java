@@ -7,14 +7,11 @@ class PlaintextInput extends Input {
 		super(inputs, "Plain");
 	}
 
-	@Override protected Character decode(String input) {
-		if (input.length() != 1)
-			return null;
-		return input.charAt(0);
+	@Override protected Integer decode(String input) {
+		return input.codePointAt(0);
 	}
 
-	@Override protected String encode(char character) {
-		return character+"";
+	@Override protected String encode(int codepoint) {
+		return codePointToString(codepoint);
 	}
-
 }
