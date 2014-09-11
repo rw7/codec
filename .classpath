@@ -7,6 +7,6 @@
 			<attribute name="javadoc_location" value="file:/C:/Program Files/Java/javafx/api/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-lang3.jar" sourcepath="lib/commons-lang3-source.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3.jar"/>
 	<classpathentry kind="output" path="eclipsebin"/>
 </classpath>
