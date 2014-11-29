@@ -11,7 +11,7 @@
 		<delete file="${build.dir}" quiet="true"/>
 	</target>
 		
-	<target name="compile">
+	<target name="compile" depends="license">
 		<mkdir dir="${build.dir}" />
 		<javac destdir="${build.dir}" encoding="US-ASCII" includeantruntime="false" srcdir="src" source="1.7" target="1.7">
 			<classpath>
@@ -39,5 +39,14 @@
 			<fileset refid="runtime.libs" />
 		</copy>
 
+	</target>
+	
+	<target name="license" description="Updates the license headers in the source files.">
+		<loadfile property="javaheader" srcFile="javaheader.txt"/>
+		<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm" replace="${javaheader}${line.separator}package ">
+			<fileset dir=".">
+				<include name="src/**/*.java"/>
+			</fileset>
+		</replaceregexp>
 	</target>
 </project>
