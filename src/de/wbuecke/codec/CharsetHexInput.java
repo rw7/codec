@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;

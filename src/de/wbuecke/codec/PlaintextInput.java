@@ -14,22 +14,20 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 
-public class XmlInput extends Input {
+class PlaintextInput extends Input {
 
-	XmlInput(Inputs inputs) {
-		super(inputs, "XML escaped");
+	public PlaintextInput(Inputs inputs) {
+		super(inputs, "Plain");
 	}
 
 	@Override protected String decode(String input) {
-		return StringEscapeUtils.unescapeXml(input);
+		return input;
 	}
 
 	@Override protected String encode(String plaintext) {
-		return StringEscapeUtils.escapeXml(plaintext);
+		return plaintext;
 	}
-
 }

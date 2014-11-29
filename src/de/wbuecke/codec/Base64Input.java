@@ -14,20 +14,27 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
+import javax.xml.bind.DatatypeConverter;
 
-class PlaintextInput extends Input {
+public class Base64Input extends HexInput {
 
-	public PlaintextInput(Inputs inputs) {
-		super(inputs, "Plain");
+	Base64Input(Inputs inputs) {
+		super(inputs, "Base64 (inverse, hex)");
 	}
 
-	@Override protected String decode(String input) {
-		return input;
+	@Override protected byte[] encodeBinary(String plaintext) {
+		try {
+			return DatatypeConverter.parseBase64Binary(plaintext);
+		}
+		catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
-	@Override protected String encode(String plaintext) {
-		return plaintext;
+	@Override protected String decodeBinary(byte[] bytes) {
+		return DatatypeConverter.printBase64Binary(bytes);
 	}
+
 }

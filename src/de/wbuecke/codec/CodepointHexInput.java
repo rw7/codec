@@ -14,28 +14,36 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
 
-public class CodepointNameInput extends Input {
+public class CodepointHexInput extends Input {
 
-	CodepointNameInput(Inputs inputs) {
-		super(inputs, "Unicode code point name\n(1st code point only)");
+	CodepointHexInput(Inputs inputs) {
+		super(inputs, "Unicode code point (hex)");
 	}
 
 	@Override protected String encode(String plaintext) {
-		if (plaintext.length() > 0)
-			return Character.getName(plaintext.codePointAt(0));
-		else
-			return "";
+		StringBuilder result = new StringBuilder();
+		boolean first = true;
+		for (int codepoint : stringToCodepoints(plaintext)) {
+			if (!first)
+				result.append(" ");
+			first = false;
+			result.append(Integer.toHexString(codepoint).toUpperCase());
+		}
+		return result.toString();
 	}
 
 	@Override protected String decode(String input) {
-		String normalized = input.trim().toUpperCase();
-		for (int codepoint=0; codepoint<0x20000; codepoint++) {
-			if (normalized.equals(Character.getName(codepoint)))
-				return String.copyValueOf(Character.toChars(codepoint));
+		try {
+			String[] groups = input.split(" ");
+			StringBuilder result = new StringBuilder();
+			for (int i=0; i<groups.length; i++)
+				result.append(Character.toChars(Integer.parseInt(groups[i], 16)));
+			return result.toString();
+		} catch (NumberFormatException e) {
+			return null;
 		}
-		return null;
 	}
 }

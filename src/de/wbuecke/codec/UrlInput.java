@@ -14,22 +14,35 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
-public class HtmlInput extends Input {
+public class UrlInput extends Input {
 
-	HtmlInput(Inputs inputs) {
-		super(inputs, "HTML escaped");
+	private final String encoding;
+
+	UrlInput(Inputs inputs, String encoding) {
+		super(inputs, "URL encoding with " + encoding + "\n(application/x-www-form-urlencoded)");
+		this.encoding = encoding;
 	}
 
 	@Override protected String decode(String input) {
-		return StringEscapeUtils.unescapeHtml4(input);
+		try {
+			return URLDecoder.decode(input, encoding);
+		} catch (UnsupportedEncodingException e) {
+			return null;
+		}
 	}
 
 	@Override protected String encode(String plaintext) {
-		return StringEscapeUtils.escapeHtml4(plaintext);
+		try {
+			return URLEncoder.encode(plaintext, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return null;
+		}
 	}
 
 }

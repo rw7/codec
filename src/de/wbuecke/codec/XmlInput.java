@@ -14,22 +14,22 @@
  * limitations under the License.
  */
  
-package com.thrivingcode.codec;
+package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-public class EcmaScriptInput extends Input {
+public class XmlInput extends Input {
 
-	EcmaScriptInput(Inputs inputs) {
-		super(inputs, "ECMAScript escaped\n(= Javascript = JSON)");
+	XmlInput(Inputs inputs) {
+		super(inputs, "XML escaped");
 	}
 
 	@Override protected String decode(String input) {
-		return StringEscapeUtils.unescapeEcmaScript(input);
+		return StringEscapeUtils.unescapeXml(input);
 	}
 
 	@Override protected String encode(String plaintext) {
-		return StringEscapeUtils.escapeEcmaScript(plaintext);
+		return StringEscapeUtils.escapeXml(plaintext);
 	}
 
 }
