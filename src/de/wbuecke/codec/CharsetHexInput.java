@@ -44,7 +44,6 @@ class CharsetHexInput extends HexInput {
 	@Override
 	protected byte[] encodeBinary(String plaintext) {
 		try {
-			System.out.println(encoder.encode(CharBuffer.wrap(plaintext)).limit());
 			ByteBuffer bb = encoder.encode(CharBuffer.wrap(plaintext));
 			byte[] b = new byte[bb.remaining()];
 			bb.get(b);
