@@ -48,7 +48,10 @@ abstract class Input {
 		if (plaintext == null)
 			textField.setText("(invalid input)");
 		else
-			textField.setText(encode(plaintext));
+		{
+			String encoded = encode(plaintext);
+			textField.setText(encoded != null ? encoded : "(unsupported)");
+		}
 	}
 	
 	abstract protected String decode(String input);

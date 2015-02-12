@@ -19,14 +19,19 @@ package de.wbuecke.codec;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
 
 public class UrlInput extends Input {
 
 	private final String encoding;
+	private final CharsetEncoder encoder;
 
 	UrlInput(Inputs inputs, String encoding) {
 		super(inputs, "URL encoding with " + encoding + "\n(application/x-www-form-urlencoded)");
 		this.encoding = encoding;
+		encoder = Charset.forName(encoding).newEncoder().onMalformedInput(CodingErrorAction.REPORT);
 	}
 
 	@Override protected String decode(String input) {
@@ -38,8 +43,11 @@ public class UrlInput extends Input {
 	}
 
 	@Override protected String encode(String plaintext) {
+		// URLEncoder replaces un-encodable characters instead of throwing an exception, hence we check beforehand
+		if (!encoder.canEncode(plaintext))
+			return null;
 		try {
-			return URLEncoder.encode(plaintext, "UTF-8");
+			return URLEncoder.encode(plaintext, encoding);
 		} catch (UnsupportedEncodingException e) {
 			return null;
 		}

@@ -31,7 +31,7 @@ public abstract class HexInput extends Input {
 	@Override protected String encode(String plaintext) {
 		byte[] bytes = encodeBinary(plaintext);
 		if (bytes == null)
-			return "(unsupported)";
+			return null;
 		StringBuilder hex = new StringBuilder();
 		for (int pos=0; pos<bytes.length; pos++)
 			hex.append(StringUtils.leftPad(Integer.toHexString(0x000000FF & bytes[pos]).toUpperCase(), 2, "0"));
