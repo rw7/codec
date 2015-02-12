@@ -51,17 +51,20 @@ public class CodecApplication extends Application {
 		inputs.add(new Separator());
 		new Base64Input(inputs);
 		inputs.add(new Separator());
-		new CharsetHexInput(inputs, "US-ASCII");
 		new CharsetHexInput(inputs, "UTF-8");
-		new CharsetHexInput(inputs, "ISO-8859-1");
-		new CharsetHexInput(inputs, "ISO-8859-15");
 		new CharsetHexInput(inputs, "UTF-16BE");
-		new CharsetHexInput(inputs, "Windows-1251");
-		new CharsetHexInput(inputs, "GB2312");
-		new CharsetHexInput(inputs, "Cp1047", "EBCDIC");
-
+		new CharsetHexInput(inputs, "US-ASCII");
+		new CharsetHexInput(inputs, "ISO-8859-1", "ISO-8859-1 (Latin-1, \"Western ISO\")");
+		new CharsetHexInput(inputs, "ISO-8859-2", "ISO-8859-2 (\"Central Europe ISO\")");
+		new CharsetHexInput(inputs, "ISO-8859-15");
+		new CharsetHexInput(inputs, "Windows-1250", "Windows/CP-1250 (\"Central Europe\")");
+		new CharsetHexInput(inputs, "Windows-1251", "Windows/CP-1251 (\"Cyrillic\")");
+		new CharsetHexInput(inputs, "Windows-1252", "Windows/CP-1252 (\"Western\")");
+		new CharsetHexInput(inputs, "GB2312", "GB2312 (official in China)");
+		new CharsetHexInput(inputs, "Cp1047", "EBCDIC (CP1047)");
+	
 		inputs.update(String.copyValueOf(Character.toChars(0x1F602)), null);
-		
+
 		return grid;
 	}
 
