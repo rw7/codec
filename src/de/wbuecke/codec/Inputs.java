@@ -61,7 +61,18 @@ class Inputs {
 		for (Map.Entry<Input, TextField> entry : inputs.entrySet()) {
 			if (entry.getKey() == except)
 				continue;
-			entry.getValue().setText(entry.getKey().encodeAndSet(plaintext));
+			
+			entry.getValue().setText(encodeAndSet(entry.getKey(), plaintext));
+		}
+	}
+	
+	private String encodeAndSet(Input input, String plaintext) {
+		if (plaintext == null)
+			return "(invalid input)";
+		else
+		{
+			String encoded = input.encode(plaintext);
+			return encoded != null ? encoded : "(unsupported)";
 		}
 	}
 }

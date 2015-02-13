@@ -16,40 +16,8 @@
  
 package de.wbuecke.codec;
 
-import java.util.Arrays;
-
-abstract class Input {
-	private final String label;
-
-	Input(final Inputs inputs, final String label) {
-		this.label = label;
-	}
-	
-	String getLabel() {
-		return label;
-	}
-
-	String encodeAndSet(String plaintext) {
-		if (plaintext == null)
-			return "(invalid input)";
-		else
-		{
-			String encoded = encode(plaintext);
-			return encoded != null ? encoded : "(unsupported)";
-		}
-	}
-	
-	abstract protected String decode(String input);
-	abstract protected String encode(String plaintext);
-	
-	protected int[] stringToCodepoints(final String string) {
-		final int[] result = new int[string.length()*2];
-		int resultOffset = 0;
-		for (int sourceOffset = 0; sourceOffset < string.length(); ) {
-		   final int codepoint = string.codePointAt(sourceOffset);
-		   result[resultOffset++] = codepoint;
-		   sourceOffset += Character.charCount(codepoint);
-		}
-		return Arrays.copyOf(result, resultOffset);
-	}
+interface Input {
+	String getLabel();
+	String decode(String input);
+	String encode(String plaintext);
 }

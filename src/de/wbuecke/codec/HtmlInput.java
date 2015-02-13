@@ -18,17 +18,17 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-class HtmlInput extends Input {
-
-	HtmlInput(Inputs inputs) {
-		super(inputs, "HTML escaped");
+class HtmlInput implements Input {
+	
+	@Override public String getLabel() {
+		return "HTML escaped";
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		return StringEscapeUtils.unescapeHtml4(input);
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		return StringEscapeUtils.escapeHtml4(plaintext);
 	}
 

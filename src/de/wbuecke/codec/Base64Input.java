@@ -19,12 +19,12 @@ package de.wbuecke.codec;
 import javax.xml.bind.DatatypeConverter;
 
 class Base64Input extends HexInput {
-
-	Base64Input(Inputs inputs) {
-		super(inputs, "Base64 (inverse, hex)");
+	
+	@Override public String getLabel() {
+		return "Base64 (inverse, hex)";
 	}
 
-	@Override protected byte[] encodeBinary(String plaintext) {
+	@Override public byte[] encodeBinary(String plaintext) {
 		try {
 			return DatatypeConverter.parseBase64Binary(plaintext);
 		}
@@ -33,7 +33,7 @@ class Base64Input extends HexInput {
 		}
 	}
 
-	@Override protected String decodeBinary(byte[] bytes) {
+	@Override public String decodeBinary(byte[] bytes) {
 		return DatatypeConverter.printBase64Binary(bytes);
 	}
 

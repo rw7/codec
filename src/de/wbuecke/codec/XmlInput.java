@@ -18,17 +18,17 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-class XmlInput extends Input {
-
-	XmlInput(Inputs inputs) {
-		super(inputs, "XML escaped");
+class XmlInput implements Input {
+	
+	@Override public String getLabel() {
+		return "XML escaped";
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		return StringEscapeUtils.unescapeXml(input);
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		return StringEscapeUtils.escapeXml(plaintext);
 	}
 

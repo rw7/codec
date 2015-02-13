@@ -17,16 +17,16 @@
 package de.wbuecke.codec;
 
 
-class CodepointHexInput extends Input {
-
-	CodepointHexInput(Inputs inputs) {
-		super(inputs, "Unicode code point (hex)");
+class CodepointHexInput implements Input {
+	
+	@Override public String getLabel() {
+		return "Unicode code point (hex)";
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		StringBuilder result = new StringBuilder();
 		boolean first = true;
-		for (int codepoint : stringToCodepoints(plaintext)) {
+		for (int codepoint : CodecUtils.stringToCodepoints(plaintext)) {
 			if (!first)
 				result.append(" ");
 			first = false;
@@ -35,7 +35,7 @@ class CodepointHexInput extends Input {
 		return result.toString();
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		try {
 			String[] groups = input.split(" ");
 			StringBuilder result = new StringBuilder();

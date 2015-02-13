@@ -23,18 +23,21 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CodingErrorAction;
 
-class UrlInput extends Input {
+class UrlInput implements Input {
 
 	private final String encoding;
 	private final CharsetEncoder encoder;
 
-	UrlInput(Inputs inputs, String encoding) {
-		super(inputs, "URL encoding with " + encoding + "\n(application/x-www-form-urlencoded)");
+	UrlInput(String encoding) {
 		this.encoding = encoding;
 		encoder = Charset.forName(encoding).newEncoder().onMalformedInput(CodingErrorAction.REPORT);
 	}
+	
+	@Override public String getLabel() {
+		return "URL encoding with " + encoding + "\n(application/x-www-form-urlencoded)";
+	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		try {
 			return URLDecoder.decode(input, encoding);
 		} catch (UnsupportedEncodingException e) {
@@ -42,7 +45,7 @@ class UrlInput extends Input {
 		}
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		// URLEncoder replaces un-encodable characters instead of throwing an exception, hence we check beforehand
 		if (!encoder.canEncode(plaintext))
 			return null;

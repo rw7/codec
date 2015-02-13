@@ -25,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class CodecApplication extends Application {
+	
 	@Override public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Codec");
 		Scene scene = new Scene(createForm());
@@ -39,29 +40,29 @@ public class CodecApplication extends Application {
 		grid.setPadding(new Insets(25));
 		
 		Inputs inputs = new Inputs(grid);
-		inputs.add(new PlaintextInput(inputs));
-		inputs.add(new CodepointHexInput(inputs));
-		inputs.add(new CodepointNameInput(inputs));
+		inputs.add(new PlaintextInput());
+		inputs.add(new CodepointHexInput());
+		inputs.add(new CodepointNameInput());
 		inputs.add(new Separator());
-		inputs.add(new HtmlInput(inputs));
-		inputs.add(new XmlInput(inputs));
-		inputs.add(new EcmaScriptInput(inputs));
-		inputs.add(new UrlInput(inputs, "UTF-8"));
-		inputs.add(new UrlInput(inputs, "ISO-8859-1"));
+		inputs.add(new HtmlInput());
+		inputs.add(new XmlInput());
+		inputs.add(new EcmaScriptInput());
+		inputs.add(new UrlInput("UTF-8"));
+		inputs.add(new UrlInput("ISO-8859-1"));
 		inputs.add(new Separator());
-		inputs.add(new Base64Input(inputs));
+		inputs.add(new Base64Input());
 		inputs.add(new Separator());
-		inputs.add(new CharsetHexInput(inputs, "UTF-8"));
-		inputs.add(new CharsetHexInput(inputs, "UTF-16BE"));
-		inputs.add(new CharsetHexInput(inputs, "US-ASCII"));
-		inputs.add(new CharsetHexInput(inputs, "ISO-8859-1", "ISO-8859-1 (Latin-1, \"Western ISO\")"));
-		inputs.add(new CharsetHexInput(inputs, "ISO-8859-2", "ISO-8859-2 (\"Central Europe ISO\")"));
-		inputs.add(new CharsetHexInput(inputs, "ISO-8859-15"));
-		inputs.add(new CharsetHexInput(inputs, "Windows-1250", "Windows/CP-1250 (\"Central Europe\")"));
-		inputs.add(new CharsetHexInput(inputs, "Windows-1251", "Windows/CP-1251 (\"Cyrillic\")"));
-		inputs.add(	new CharsetHexInput(inputs, "Windows-1252", "Windows/CP-1252 (\"Western\")"));
-		inputs.add(new CharsetHexInput(inputs, "GB2312", "GB2312 (official in China)"));
-		inputs.add(new CharsetHexInput(inputs, "Cp1047", "EBCDIC (CP1047)"));
+		inputs.add(new CharsetHexInput("UTF-8"));
+		inputs.add(new CharsetHexInput("UTF-16BE"));
+		inputs.add(new CharsetHexInput("US-ASCII"));
+		inputs.add(new CharsetHexInput("ISO-8859-1", "ISO-8859-1 (Latin-1, \"Western ISO\")"));
+		inputs.add(new CharsetHexInput("ISO-8859-2", "ISO-8859-2 (\"Central Europe ISO\")"));
+		inputs.add(new CharsetHexInput("ISO-8859-15"));
+		inputs.add(new CharsetHexInput("Windows-1250", "Windows/CP-1250 (\"Central Europe\")"));
+		inputs.add(new CharsetHexInput("Windows-1251", "Windows/CP-1251 (\"Cyrillic\")"));
+		inputs.add(new CharsetHexInput("Windows-1252", "Windows/CP-1252 (\"Western\")"));
+		inputs.add(new CharsetHexInput("GB2312", "GB2312 (official in China)"));
+		inputs.add(new CharsetHexInput("Cp1047", "EBCDIC (CP1047)"));
 	
 		inputs.update(String.copyValueOf(Character.toChars(0x1F602)), null);
 

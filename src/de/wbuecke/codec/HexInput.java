@@ -18,16 +18,12 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringUtils;
 
-abstract class HexInput extends Input {
-
-	HexInput(Inputs inputs, String label) {
-		super(inputs, label);
-	}
-
+abstract class HexInput implements Input {
+	
 	protected abstract byte[] encodeBinary(String plaintext);
 	protected abstract String decodeBinary(byte[] bytes);
 	
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		byte[] bytes = encodeBinary(plaintext);
 		if (bytes == null)
 			return null;
@@ -37,7 +33,7 @@ abstract class HexInput extends Input {
 		return hex.toString();
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		if (input.length() % 2 != 0 || input.length() == 0)
 			return null;
 		

@@ -17,17 +17,17 @@
 package de.wbuecke.codec;
 
 
-class PlaintextInput extends Input {
-
-	PlaintextInput(Inputs inputs) {
-		super(inputs, "Plain");
+class PlaintextInput implements Input {
+	
+	@Override public String getLabel() {
+		return "Plaintext";
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		return input;
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		return plaintext;
 	}
 }

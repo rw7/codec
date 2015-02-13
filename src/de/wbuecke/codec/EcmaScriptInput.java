@@ -18,17 +18,17 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-class EcmaScriptInput extends Input {
-
-	EcmaScriptInput(Inputs inputs) {
-		super(inputs, "ECMAScript escaped\n(= Javascript = JSON)");
+class EcmaScriptInput implements Input {
+	
+	@Override public String getLabel() {
+		return "ECMAScript escaped\n(= Javascript = JSON)";
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		return StringEscapeUtils.unescapeEcmaScript(input);
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		return StringEscapeUtils.escapeEcmaScript(plaintext);
 	}
 

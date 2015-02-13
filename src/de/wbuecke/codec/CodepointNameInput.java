@@ -17,20 +17,20 @@
 package de.wbuecke.codec;
 
 
-class CodepointNameInput extends Input {
-
-	CodepointNameInput(Inputs inputs) {
-		super(inputs, "Unicode code point name\n(1st code point only)");
+class CodepointNameInput implements Input {
+	
+	@Override public String getLabel() {
+		return "Unicode code point name\n(1st code point only)";
 	}
 
-	@Override protected String encode(String plaintext) {
+	@Override public String encode(String plaintext) {
 		if (plaintext.length() > 0)
 			return Character.getName(plaintext.codePointAt(0));
 		else
 			return "";
 	}
 
-	@Override protected String decode(String input) {
+	@Override public String decode(String input) {
 		String normalized = input.trim().toUpperCase();
 		for (int codepoint=0; codepoint<0x20000; codepoint++) {
 			if (normalized.equals(Character.getName(codepoint)))

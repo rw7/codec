@@ -29,20 +29,24 @@ class CharsetHexInput extends HexInput {
 	private final CharsetEncoder encoder;
 	private final CharsetDecoder decoder;
 	private final Charset charset;
+	private final String label;
 
-	CharsetHexInput(Inputs inputs, String charsetName) {
-		this(inputs, charsetName, charsetName);
+	CharsetHexInput(String charsetName) {
+		this(charsetName, charsetName);
 	}
-	
-	CharsetHexInput(Inputs inputs, String charsetName, String label) {
-		super(inputs, label + " (hex)");
+
+	CharsetHexInput(String charsetName, String label) {
+		this.label = label + " (hex)";
 		charset = Charset.forName(charsetName);
 		encoder = charset.newEncoder().onMalformedInput(CodingErrorAction.REPORT);
 		decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPORT);
 	}
+	
+	@Override public String getLabel() {
+		return label;
+	}
 
-	@Override
-	protected byte[] encodeBinary(String plaintext) {
+	@Override public byte[] encodeBinary(String plaintext) {
 		try {
 			ByteBuffer bb = encoder.encode(CharBuffer.wrap(plaintext));
 			byte[] b = new byte[bb.remaining()];
@@ -53,8 +57,7 @@ class CharsetHexInput extends HexInput {
 		}
 	}
 
-	@Override
-	protected String decodeBinary(final byte[] bytes) {
+	@Override public String decodeBinary(final byte[] bytes) {
 		try {
 			return decoder.decode(ByteBuffer.wrap(bytes)).toString();
 		} catch (CharacterCodingException e) {
