@@ -20,7 +20,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -32,8 +34,11 @@ class Inputs {
 	private final GridPane grid;
 	int row = 0;
 
-	Inputs(GridPane grid) {
-		this.grid = grid;
+	Inputs() {
+		grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25));
 	}
 
 	void add(Input input) {
@@ -74,5 +79,9 @@ class Inputs {
 			String encoded = input.encode(plaintext);
 			return encoded != null ? encoded : "(unsupported)";
 		}
+	}
+	
+	Parent getNode() {
+		return grid;
 	}
 }

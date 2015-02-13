@@ -17,11 +17,9 @@
 package de.wbuecke.codec;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class CodecApplication extends Application {
@@ -34,12 +32,7 @@ public class CodecApplication extends Application {
 	}
 	
 	private Parent createForm() {
-		GridPane grid = new GridPane();
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25));
-		
-		Inputs inputs = new Inputs(grid);
+		Inputs inputs = new Inputs();
 		inputs.add(new PlaintextInput());
 		inputs.add(new CodepointHexInput());
 		inputs.add(new CodepointNameInput());
@@ -66,7 +59,7 @@ public class CodecApplication extends Application {
 	
 		inputs.update(String.copyValueOf(Character.toChars(0x1F602)), null);
 
-		return grid;
+		return inputs.getNode();
 	}
 
 	public static void main(String[] args) {
