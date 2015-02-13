@@ -30,11 +30,11 @@ class CharsetHexInput extends HexInput {
 	final private CharsetDecoder decoder;
 	final private Charset charset;
 
-	public CharsetHexInput(Inputs inputs, String charsetName) {
+	CharsetHexInput(Inputs inputs, String charsetName) {
 		this(inputs, charsetName, charsetName);
 	}
 	
-	public CharsetHexInput(Inputs inputs, String charsetName, String label) {
+	CharsetHexInput(Inputs inputs, String charsetName, String label) {
 		super(inputs, label + " (hex)");
 		charset = Charset.forName(charsetName);
 		encoder = charset.newEncoder().onMalformedInput(CodingErrorAction.REPORT);

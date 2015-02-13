@@ -17,7 +17,7 @@
 package de.wbuecke.codec;
 
 
-public class CodepointHexInput extends Input {
+class CodepointHexInput extends Input {
 
 	CodepointHexInput(Inputs inputs) {
 		super(inputs, "Unicode code point (hex)");

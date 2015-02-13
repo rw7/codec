@@ -17,7 +17,7 @@
 package de.wbuecke.codec;
 
 
-public class CodepointNameInput extends Input {
+class CodepointNameInput extends Input {
 
 	CodepointNameInput(Inputs inputs) {
 		super(inputs, "Unicode code point name\n(1st code point only)");

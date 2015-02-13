@@ -19,7 +19,7 @@ package de.wbuecke.codec;
 
 class PlaintextInput extends Input {
 
-	public PlaintextInput(Inputs inputs) {
+	PlaintextInput(Inputs inputs) {
 		super(inputs, "Plain");
 	}
 

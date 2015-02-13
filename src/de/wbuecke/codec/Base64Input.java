@@ -18,7 +18,7 @@ package de.wbuecke.codec;
 
 import javax.xml.bind.DatatypeConverter;
 
-public class Base64Input extends HexInput {
+class Base64Input extends HexInput {
 
 	Base64Input(Inputs inputs) {
 		super(inputs, "Base64 (inverse, hex)");

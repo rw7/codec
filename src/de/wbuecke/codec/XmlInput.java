@@ -18,7 +18,7 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-public class XmlInput extends Input {
+class XmlInput extends Input {
 
 	XmlInput(Inputs inputs) {
 		super(inputs, "XML escaped");

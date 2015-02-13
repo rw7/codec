@@ -18,7 +18,7 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-public class EcmaScriptInput extends Input {
+class EcmaScriptInput extends Input {
 
 	EcmaScriptInput(Inputs inputs) {
 		super(inputs, "ECMAScript escaped\n(= Javascript = JSON)");

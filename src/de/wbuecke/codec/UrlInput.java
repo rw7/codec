@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CodingErrorAction;
 
-public class UrlInput extends Input {
+class UrlInput extends Input {
 
 	private final String encoding;
 	private final CharsetEncoder encoder;

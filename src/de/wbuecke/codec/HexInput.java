@@ -18,8 +18,7 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringUtils;
 
-
-public abstract class HexInput extends Input {
+abstract class HexInput extends Input {
 
 	HexInput(Inputs inputs, String label) {
 		super(inputs, label);

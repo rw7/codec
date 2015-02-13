@@ -18,7 +18,7 @@ package de.wbuecke.codec;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-public class HtmlInput extends Input {
+class HtmlInput extends Input {
 
 	HtmlInput(Inputs inputs) {
 		super(inputs, "HTML escaped");
