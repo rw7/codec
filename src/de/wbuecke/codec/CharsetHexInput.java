@@ -26,9 +26,9 @@ import java.nio.charset.CodingErrorAction;
 
 class CharsetHexInput extends HexInput {
 
-	final private CharsetEncoder encoder;
-	final private CharsetDecoder decoder;
-	final private Charset charset;
+	private final CharsetEncoder encoder;
+	private final CharsetDecoder decoder;
+	private final Charset charset;
 
 	CharsetHexInput(Inputs inputs, String charsetName) {
 		this(inputs, charsetName, charsetName);

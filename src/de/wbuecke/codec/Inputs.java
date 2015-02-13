@@ -28,8 +28,8 @@ import javafx.scene.layout.GridPane;
 
 class Inputs {
 
-	private Map<Input, TextField> inputs = new LinkedHashMap<>();
-	private GridPane grid;
+	private final Map<Input, TextField> inputs = new LinkedHashMap<>();
+	private final GridPane grid;
 	int row = 0;
 
 	Inputs(GridPane grid) {
