@@ -16,44 +16,52 @@
  
 package de.wbuecke.codec;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 class Inputs {
 
-	private List<Input> inputs = new ArrayList<>();
+	private Map<Input, TextField> inputs = new LinkedHashMap<>();
 	private GridPane grid;
 	int row = 0;
 
-	public Inputs(GridPane grid) {
+	Inputs(GridPane grid) {
 		this.grid = grid;
 	}
 
 	void add(Input input) {
-		inputs.add(input);
+		Label labelNode = new Label(input.getLabel());
+		grid.add(labelNode, 0, row);
+
+		TextField textField = new TextField();
+		textField.setMinWidth(300);
+		textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override public void handle(KeyEvent event) {
+				String text = textField.getText();
+				update(input.decode(text), input);
+			}
+		});
+		grid.add(textField, 1, row);
+		inputs.put(input, textField);
+		row++;
 	}
 
-	public void add(Node node) {
-		int r = row++;
-		grid.add(node, 0, r, 2, 1);
+	void add(Node node) {
+		grid.add(node, 0, row++, 2, 1);
 	}
 	
-	public int nextRow() {
-		return row++;
-	}
-
-	GridPane getGrid() {
-		return grid;
-	}
-
-	public void update(String plaintext, Input except) {
-		for (Input input : inputs) {
-			if (input == except)
+	void update(String plaintext, Input except) {
+		for (Map.Entry<Input, TextField> entry : inputs.entrySet()) {
+			if (entry.getKey() == except)
 				continue;
-			input.encodeAndSet(plaintext);
+			entry.getValue().setText(entry.getKey().encodeAndSet(plaintext));
 		}
 	}
 }
