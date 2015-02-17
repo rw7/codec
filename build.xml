@@ -13,7 +13,7 @@
 		
 	<target name="compile" depends="license">
 		<mkdir dir="${build.dir}" />
-		<javac destdir="${build.dir}" encoding="US-ASCII" includeantruntime="false" srcdir="src" source="1.8" target="1.8">
+		<javac destdir="${build.dir}" encoding="US-ASCII" includeantruntime="false" srcdir="src" source="1.7" target="1.7">
 			<classpath>
 				<fileset refid="runtime.libs" />
 				<fileset dir="${java.home}/lib" includes="jfxrt.jar"/>
