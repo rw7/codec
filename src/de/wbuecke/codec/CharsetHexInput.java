@@ -18,18 +18,13 @@ package de.wbuecke.codec;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CodingErrorAction;
+import java.nio.charset.*;
 
 class CharsetHexInput extends HexInput {
 
 	private final CharsetEncoder encoder;
 	private final CharsetDecoder decoder;
-	private final Charset charset;
-	private final String label;
+    private final String label;
 
 	CharsetHexInput(String charsetName) {
 		this(charsetName, charsetName);
@@ -37,7 +32,7 @@ class CharsetHexInput extends HexInput {
 
 	CharsetHexInput(String charsetName, String label) {
 		this.label = label + " (hex)";
-		charset = Charset.forName(charsetName);
+        Charset charset = Charset.forName(charsetName);
 		encoder = charset.newEncoder().onMalformedInput(CodingErrorAction.REPORT);
 		decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPORT);
 	}
