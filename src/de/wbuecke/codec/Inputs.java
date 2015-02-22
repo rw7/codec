@@ -38,11 +38,11 @@ class Inputs {
 		grid.setPadding(new Insets(25));
 	}
 
-	void add(Input input) {
-		Label labelNode = new Label(input.getLabel());
+	void add(final Input input) {
+		final Label labelNode = new Label(input.getLabel());
 		grid.add(labelNode, 0, row);
 
-		TextField textField = new TextField();
+		final TextField textField = new TextField();
 		textField.setMinWidth(300);
 		textField.setOnKeyReleased(event -> update(input.decode(textField.getText()), input));
 		grid.add(textField, 1, row);
