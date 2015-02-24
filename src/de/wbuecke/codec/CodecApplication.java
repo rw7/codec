@@ -37,6 +37,7 @@ public class CodecApplication extends Application {
 		inputs.add(new CodepointHexInput());
 		inputs.add(new CodepointNameInput());
 		inputs.add(new Separator());
+		inputs.add(new JavaInput());
 		inputs.add(new HtmlInput());
 		inputs.add(new XmlInput());
 		inputs.add(new EcmaScriptInput());
