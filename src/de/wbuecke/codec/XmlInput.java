@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 class XmlInput implements Input {
 	
 	@Override public String getLabel() {
-		return "XML escaped";
+		return "XML 1.1 escaped";
 	}
 
 	@Override public String decode(String input) {
@@ -29,7 +29,7 @@ class XmlInput implements Input {
 	}
 
 	@Override public String encode(String plaintext) {
-		return StringEscapeUtils.escapeXml(plaintext);
+		return StringEscapeUtils.escapeXml11(plaintext);
 	}
 
 }
