@@ -36,6 +36,10 @@
 		</copy>
 	</target>
 
+	<target name="run" depends="dist">
+		<java jar="${artifacts.dir}/codec.jar" fork="true" />
+	</target>
+
 	<target name="license" description="Updates the license headers in the source files.">
 		<loadfile property="javaheader" srcFile="javaheader.txt"/>
 		<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm" replace="${javaheader}${line.separator}package ">
