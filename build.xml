@@ -1,16 +1,16 @@
 <project name="codec" default="all">
 	<property name="build.dir" location="build" />
 	<property name="artifacts.dir" location="bin" />
-	
+
 	<fileset id="runtime.libs" dir="lib" includes="*.jar" excludes="*-source.jar" />
-	
+
 	<target name="all" depends="clean,dist" />
 
 	<target name="clean">
 		<delete dir="${artifacts.dir}" includes="**" includeemptydirs="true" />
 		<delete dir="${build.dir}" includes="**" includeemptydirs="true" />
 	</target>
-		
+
 	<target name="compile" depends="license">
 		<mkdir dir="${build.dir}" />
 		<javac destdir="${build.dir}" encoding="US-ASCII" includeantruntime="false" srcdir="src" source="1.8" target="1.8">
@@ -20,7 +20,7 @@
 			</classpath>
 		</javac>
 	</target>
-	
+
 	<target name="dist" depends="compile">
 		<jar basedir="${build.dir}" destfile="${artifacts.dir}/codec.jar">
 			<fileset dir="${build.dir}" includes="*.class" />
@@ -35,7 +35,7 @@
 			<fileset refid="runtime.libs" />
 		</copy>
 	</target>
-	
+
 	<target name="license" description="Updates the license headers in the source files.">
 		<loadfile property="javaheader" srcFile="javaheader.txt"/>
 		<replaceregexp match="(/\*.*\*/.*)??^package " flags="sm" replace="${javaheader}${line.separator}package ">
